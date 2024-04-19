@@ -18,10 +18,11 @@ export class MoviesController {
     return this.moviesService.findMovies();
   }
 
-  @Get(':id')
-  findOneMovie(@Param('id', new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) uuid: string) {
-    return this.moviesService.findOneMovie(uuid);
+  @Get(':id') // new ParseUUIDPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) uuid:
+  findOneMovie(@Param('id') id: string) {
+    return this.moviesService.findOneMovie(id);
   }
+  //utilice validacion por uuid, ya que el id de nuestras movies en este caso esta en ese formato. tambien se podria validar por string.
 
  /* @Patch(':id')
   update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {

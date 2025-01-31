@@ -1,24 +1,28 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 //import { CreateMovieDto } from './dto/create-movie.dto';
 //import { UpdateMovieDto } from './dto/update-movie.dto';
-import { results } from '../model/movies.json'; //importamos objeto results que contiene nuestra base de datos en json
+import { results } from '../model/movies.json';
+//importamos objeto results que contiene nuestra base de datos en json
+import { Imovie } from '../movies/entities/movie.entity'; //importamos interface que contiene estructura de la pelicula
 
 @Injectable()
 export class MoviesService {
-  // create(createMovieDto: CreateMovieDto) {
-  // return 'This action adds a new movie';
-  // }
+  private movies: Imovie[]; //movies contendrá la lista de películas.
 
-  findMovies() {
-    return results;
+  constructor() {
+    this.movies = results;
   }
 
-  findOneMovie(id: string) {
+  async findMovies(): Promise<Imovie[]> {// método devuelve una promesa de un array de películas 
+    return this.movies; // lista completa de películas almacenadas en la propiedad movies.
+  }
+
+  async findOneMovie(id: string): Promise<Imovie> {
     try {
       const movie = results.find((movie) => movie.id === id);//buscame en objeto results, la movie que coincida con el id ingresado por parametro y devolveme el resultado en una constante movie
       if (Object.keys(movie).length)
       return movie;
-    } catch (error) {
+    } catch (error) { //se lanza excepcion 
       throw new NotFoundException(`Track con id '${id}' no existe`);
     }
 }

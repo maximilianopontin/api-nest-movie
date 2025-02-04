@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as cors from 'cors';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,7 +12,8 @@ async function bootstrap() {
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     credentials: true, // Permite el uso de cookies si es necesario
   });
+  app.use(cors()); // Habilitar CORS
 
-  await app.listen(process.env.PORT || 8080);
+  await app.listen( 8080);
 }
 bootstrap();

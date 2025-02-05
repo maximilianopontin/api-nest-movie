@@ -20,7 +20,7 @@ export class MoviesController {
     return this.moviesService.findMovies();
   }
 
-  @Get(':id') // maneja solicitudes GET a la ruta /movies/:id. 
+  /*@Get(':id') // maneja solicitudes GET a la ruta /movies/:id. 
   async findOneMovie(@Param('id') id: string):Promise<Imovie>{//Utiliza el decorador @Param('id') para obtener el valor del parámetro de la UR
     return this.moviesService.findOneMovie(id); // llama al método del servicio para buscar una película por su ID y devolverla.
   }

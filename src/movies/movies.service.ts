@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 //import { CreateMovieDto } from './dto/create-movie.dto';
 //import { UpdateMovieDto } from './dto/update-movie.dto';
-import { results } from '../model/movies.json';
+//import { results } from '../model/movies.json';
 //importamos objeto results que contiene nuestra base de datos en json
 import { Imovie } from '../movies/entities/movie.entity'; //importamos interface que contiene estructura de la pelicula
 import * as fs from 'fs';
@@ -30,7 +30,7 @@ export class MoviesService {
     return this.movies;
   }
 
-  async findOneMovie(id: string): Promise<Imovie> {
+  /*async findOneMovie(id: string): Promise<Imovie> {
     try {
       const movie = results.find((movie) => movie.id === id);//buscame en objeto results, la movie que coincida con el id ingresado por parametro y devolveme el resultado en una constante movie
       if (Object.keys(movie).length)

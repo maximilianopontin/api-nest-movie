@@ -4,12 +4,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Configurar CORS correctamente
+  // 🔹 Habilitar CORS sin restricciones temporales para probar
   app.enableCors({
-    origin: "https://api-react-movie.onrender.com", // URL de tu frontend en Render
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Content-Type, Authorization",
-    credentials: true,
+    origin: '*', // Permite cualquier origen temporalmente
+    methods: 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true, // Si usas cookies o tokens de autenticación
   });
 
   await app.listen(8080);

@@ -3,16 +3,16 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  // Habilitar CORS para permitir peticiones desde el frontend
+
+  // Configurar CORS correctamente
   app.enableCors({
-    origin: 'https://api-react-movie.onrender.com/', 
-    methods: 'GET,POST,PUT,DELETE',
+    origin: "https://api-react-movie.onrender.com", // URL de tu frontend en Render
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type, Authorization",
+    credentials: true,
   });
 
-  const port = process.env.PORT || 8080;
-  await app.listen(port);
-  console.log(`Backend corriendo en el puerto ${port}`);
+  await app.listen(8080);
 }
 
 bootstrap();

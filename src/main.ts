@@ -3,16 +3,16 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  // 🔹 Habilitar CORS sin restricciones temporales para probar
+  
   app.enableCors({
-    origin: '*', // Permite cualquier origen temporalmente
+    origin: '*',
     methods: 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization',
-    credentials: true, // Si usas cookies o tokens de autenticación
+    credentials: true,
   });
 
-  await app.listen(8080);
+  const PORT = process.env.PORT || 8080; // Usa el puerto asignado por Render
+  await app.listen(PORT);
 }
 
 bootstrap();

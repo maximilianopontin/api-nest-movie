@@ -17,7 +17,7 @@ export class MoviesService {
 
   private loadMovies(): Imovie[] {
     try {
-      const filePath = path.join(__dirname, '../../movies.json'); // Asegúrate de que la ruta sea correcta
+      const filePath = path.join(__dirname, '../model/movies.json'); // Asegúrate de que la ruta sea correcta
       const data = fs.readFileSync(filePath, 'utf-8');
       return JSON.parse(data);
     } catch (error) {

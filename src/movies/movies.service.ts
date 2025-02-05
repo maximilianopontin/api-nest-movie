@@ -4,17 +4,30 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { results } from '../model/movies.json';
 //importamos objeto results que contiene nuestra base de datos en json
 import { Imovie } from '../movies/entities/movie.entity'; //importamos interface que contiene estructura de la pelicula
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class MoviesService {
-  private movies: Imovie[]; //movies contendrá la lista de películas.
+  private movies: Imovie[];
 
   constructor() {
-    this.movies = results;
+    this.movies = this.loadMovies();
   }
 
-  async findMovies(): Promise<Imovie[]> {// método devuelve una promesa de un array de películas 
-    return this.movies; // lista completa de películas almacenadas en la propiedad movies.
+  private loadMovies(): Imovie[] {
+    try {
+      const filePath = path.join(__dirname, '../../movies.json'); // Asegúrate de que la ruta sea correcta
+      const data = fs.readFileSync(filePath, 'utf-8');
+      return JSON.parse(data);
+    } catch (error) {
+      console.error('Error al cargar el archivo movies.json:', error);
+      return [];
+    }
+  }
+
+  async findMovies(): Promise<Imovie[]> {
+    return this.movies;
   }
 
   async findOneMovie(id: string): Promise<Imovie> {
